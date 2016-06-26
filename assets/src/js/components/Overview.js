@@ -1,7 +1,11 @@
-import React    from 'react';
-import ReactDOM from 'react-dom';
-import store    from '../store/urlStore';
-import UrlList  from './UrlList';
+import React      from 'react';
+import ReactDOM   from 'react-dom';
+import store      from '../store/urlStore';
+import UrlList    from './UrlList';
+import AddUrlForm from './AddUrlForm';
+
+
+
 
 export default React.createClass({
     getInitialState() {
@@ -19,7 +23,6 @@ export default React.createClass({
     },
 
     onDelete(id) {
-        console.log(`id is = ${id}`);
         var data = this.state.data.filter((urlItem, index) => {
             if(urlItem.id === id) {
                 console.log("We have a match");
@@ -33,12 +36,22 @@ export default React.createClass({
         store.save(data);
     },
 
+    onSubmitUrlItem(urlItem) {
+        let data = this.state.data.concat([urlItem]);
+        this.setState({
+            data: data
+        });
+        store.save(data);
+    },
+
     render() {
         return (
             <div>
                 <h3>Overview Page</h3>
+                <AddUrlForm  onSubmitUrl={this.onSubmitUrlItem}  />
+                <hr/>
 
-                <UrlList urls={this.state.data} onUpdateUrlItem={this.onUpdate} onDeleteUrlItem={this.onDelete}/>
+                <UrlList urls={this.state.data} onUpdateUrlItem={this.onUpdate} onDeleteUrlItem={this.onDelete} />
             </div>
         );
     }
