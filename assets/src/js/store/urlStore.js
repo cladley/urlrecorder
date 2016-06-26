@@ -14,10 +14,21 @@ let data = [
 
 let store = {
     /**
+     * Saves array of urls items to local storage
+     * @param {Array} urls 
+     */
+    save(urls) {
+        localStorage.setItem('urls', JSON.stringify(urls));
+    },
+    /**
      * Returns Links from local storage
      * @return {Array} 
      */
     get() {
+        if(localStorage.getItem('urls') !== null){
+            return data;
+            // return JSON.parse(localStorage.getItem('urls'));
+        }
         return data;
     }
 }
