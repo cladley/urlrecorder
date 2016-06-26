@@ -11,15 +11,11 @@ export default React.createClass({
     onPrevClick(){
         if(this.state.currentPage - 1 >= 1){
             this.changePage(this.state.currentPage - 1);
-        }else {
-            console.log("Cant go back");
         }
     },
     onNextClick() {
         if(this.state.currentPage + 1 <= this.pages) {
             this.changePage(this.state.currentPage + 1);
-        }else {
-            console.log("Cant go forward");
         }
     },
     onPageClick(i){

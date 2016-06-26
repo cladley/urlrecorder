@@ -72,19 +72,19 @@ let UrlItem = React.createClass({
         let url = this.state.url;
         return (
             <div className="url-item url-item--edit">
-                <input ref="urlInput" type="text"  value={url} onChange={this.onChange}  onKeyPress={this.onKeyPress} onClick={(e) => e.stopPropagation()} />
+                <input ref="urlInput" type="text" className="url-item__input"  value={url} onChange={this.onChange}  onKeyPress={this.onKeyPress} onClick={(e) => e.stopPropagation()} />
             </div>
         );
     },
     createDeleteView() {
         return (
             <div className="url-item url-item--delete">
-                <span>{ this.state.url }</span>
-                <span>
+               
+                <span className="url-item__message">
                     Are you sure? 
+                </span>
                     <button onClick={this.onDelete}>Yes</button>
                     <button onClick={() => this.setState({delete: false}) }>No</button>
-                </span>
             </div>
         );
     },
@@ -169,4 +169,4 @@ export default React.createClass({
 
         );
     }
-})
+});

@@ -12,10 +12,8 @@ export default React.createClass({
                     </div>
                 </header>
                 <div className="container">
-                    <h1>This is the Links App</h1>
                     { this.props.children }
                 </div>
-    
             </div>   
         );
     }
