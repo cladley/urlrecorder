@@ -4,8 +4,10 @@ export default React.createClass({
     render() {
         return ( 
             <div>
-                <h1>This is the App - Header</h1>
+                <header>header</header>
+                <h1>This is the Links App</h1>
                 { this.props.children }
+                <footer>Footer</footer>
             </div>   
         );
     }
