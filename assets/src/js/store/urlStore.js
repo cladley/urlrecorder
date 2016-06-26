@@ -26,10 +26,9 @@ let store = {
      */
     get() {
         if(localStorage.getItem('urls') !== null){
-            return data;
-            // return JSON.parse(localStorage.getItem('urls'));
+            return JSON.parse(localStorage.getItem('urls'));
         }
-        return data;
+        return [];
     }
 }
 

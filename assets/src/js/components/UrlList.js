@@ -32,7 +32,10 @@ let UrlItem = React.createClass({
     },
 
     onChange(event) {
-    
+        this.setState({
+            url: event.target.value
+        });
+        this.props.onUpdate(event.target.value);
     },
 
     createEditView() {
@@ -83,11 +86,15 @@ let UrlItem = React.createClass({
 
 export default React.createClass({
 
+    onUpdate(index, url) {
+        this.props.onUpdateUrlItem(index, url);
+    },
+
     constructUrlItems(urls){
         return urls.map((urlItem, index) => {
             return (
                 <li key={urlItem.id} className="url-list__item">
-                    <UrlItem url={urlItem.url} />
+                    <UrlItem url={urlItem.url} onUpdate={this.onUpdate.bind(this, index)} />
                 </li>
             );
         });

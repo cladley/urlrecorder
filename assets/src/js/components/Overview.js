@@ -9,12 +9,21 @@ export default React.createClass({
             data: store.get()
         };
     },
+
+    onUpdate(index, url) {
+        this.state.data[index].url = url;
+        this.setState({
+            data: this.state.data
+        });
+        store.save(this.state.data);
+    },
+
     render() {
         return (
             <div>
                 <h3>Overview Page</h3>
 
-                <UrlList urls={this.state.data} />
+                <UrlList urls={this.state.data} onUpdateUrlItem={this.onUpdate}/>
             </div>
         );
     }
