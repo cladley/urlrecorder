@@ -1,6 +1,6 @@
-import React    from 'react';
-import ReactDOM from 'react-dom';
-
+import React      from 'react';
+import ReactDOM   from 'react-dom';
+import Pagination from './Pagination';
 
 let UrlItem = React.createClass({
     getInitialState() {
@@ -14,6 +14,7 @@ let UrlItem = React.createClass({
         var input = ReactDOM.findDOMNode(this.refs.urlInput);
         if(input){
             input.focus();
+
         }
     },
     onEdit(event) {
@@ -32,10 +33,16 @@ let UrlItem = React.createClass({
     },
 
     onChange(event) {
+ 
         this.setState({
             url: event.target.value
         });
         this.props.onUpdate(event.target.value);
+    },
+    onKeyPress(event) {
+        if (event.key === 'Enter') {
+            this.onEditClose();
+        }
     },
     onTryDelete(event) {
         this.setState({
@@ -49,7 +56,7 @@ let UrlItem = React.createClass({
     createEditView() {
         return (
             <div className="url-item url-item--edit">
-                <input ref="urlInput" type="text" value={this.state.url} onChange={this.onChange}/>
+                <input ref="urlInput" type="text" value={this.state.url} onChange={this.onChange} onKeyPress={this.onKeyPress} onClick={(e) => e.stopPropagation()} />
             </div>
         );
     },
@@ -100,6 +107,11 @@ let UrlItem = React.createClass({
 
 
 export default React.createClass({
+    getInitialState() {
+        return {
+            currentPage: 0
+        };
+    },
 
     onUpdate(index, url) {
         this.props.onUpdateUrlItem(index, url);
@@ -107,6 +119,12 @@ export default React.createClass({
 
     onDelete(id) {
         this.props.onDeleteUrlItem(id);
+    },
+
+    pageChange(pageNumber) {
+        this.setState({
+           currentPage: pageNumber - 1
+        });
     },
 
     constructUrlItems(urls){
@@ -120,12 +138,19 @@ export default React.createClass({
     },
 
     render() {
+        let startPosition = this.state.currentPage * this.props.perPage;
+        let finishPosition = startPosition + this.props.perPage;
+        let urlsPage = this.props.urls.slice(startPosition, finishPosition);
+
+
         return (
             <div className="url-list-container">
                 <ul className="url-list">
-                    {this.constructUrlItems(this.props.urls)}
+                    {this.constructUrlItems(urlsPage)}
                 </ul>
+                <Pagination perPage={this.props.perPage} total={this.props.urls.length} onPageChange={this.pageChange}/>
             </div>
+
         );
     }
 })

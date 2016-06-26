@@ -51,7 +51,7 @@ export default React.createClass({
                 <AddUrlForm  onSubmitUrl={this.onSubmitUrlItem}  />
                 <hr/>
 
-                <UrlList urls={this.state.data} onUpdateUrlItem={this.onUpdate} onDeleteUrlItem={this.onDelete} />
+                <UrlList urls={this.state.data} onUpdateUrlItem={this.onUpdate} onDeleteUrlItem={this.onDelete} perPage={3} />
             </div>
         );
     }

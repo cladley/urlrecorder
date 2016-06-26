@@ -4,8 +4,14 @@ import utils   from '../utils/utils';
 
 export default React.createClass({
 
+    onkeyPress(event) {
+        if (event.key === 'Enter') {
+            this.onSubmit();
+        }
+    },
+
     onSubmit(event) {
-        event.preventDefault();
+        if(event) event.preventDefault();
 
         let url = this.refs.inputUrl.value;
         this.refs.inputUrl.value = "";
@@ -22,7 +28,7 @@ export default React.createClass({
             <div className="create-url">
                 <h5>Add a new one</h5>
                 <form className="create-url__form" onSubmit={this.onSubmit}>
-                    <input type="text" ref="inputUrl" />
+                    <input type="text" ref="inputUrl" onKeyPress={this.onKeyPress}/>
                     <button type="submit">Add</button>
                 </form>
 
