@@ -29,6 +29,20 @@ let store = {
             return JSON.parse(localStorage.getItem('urls'));
         }
         return [];
+    },
+     /**
+     * Returns Link from local storage
+     * @return {Object} 
+     */
+    find(id) {
+        if(localStorage.getItem('urls') !== null){
+            let urls = JSON.parse(localStorage.getItem('urls'));
+            for(let i = 0; i < urls.length; i++) {
+                if(urls[i].id === id){
+                    return urls[i];
+                }
+            }
+        }
     }
 }
 

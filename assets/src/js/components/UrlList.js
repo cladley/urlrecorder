@@ -43,9 +43,6 @@ let UrlItem = React.createClass({
             });
         }
 
-
-
-
         this.setState({
             edit: false
         });

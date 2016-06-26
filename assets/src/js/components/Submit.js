@@ -9,6 +9,7 @@ export default React.createClass({
         let data = store.get();
         data = data.concat([urlItem]);
         store.save(data);
+        browserHistory.push('/result/' + urlItem.id);
     },
     
     render() {

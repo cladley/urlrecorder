@@ -24,9 +24,6 @@ export default React.createClass({
 
     onDelete(id) {
         var data = this.state.data.filter((urlItem, index) => {
-            if(urlItem.id === id) {
-                console.log("We have a match");
-            }
             return urlItem.id !== id;
         });
 
