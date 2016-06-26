@@ -56,21 +56,6 @@ let UrlItem = React.createClass({
     },
     onKeyPress(event) {
         if (event.key === 'Enter') {
-
-            // if(utils.isValidUrl(event.target.value)){
-               
-            //     this.setState({
-            //         url: event.target.value,
-            //         initialUrl: event.target.value
-            //     });
-
-            //     this.props.onUpdate(event.target.value);
-            // }else {
-            //     this.setState({
-            //         url: this.state.initialUrl
-            //     });
-            // }
-
             this.onEditClose();
         }
     },
@@ -106,7 +91,7 @@ let UrlItem = React.createClass({
     createDefaultView() {
         return (
             <div className="url-item">
-                { this.state.url } 
+                <span className="url-item__text">{ this.state.url }</span>
                 <button className="btnEdit" onClick={this.onEdit}>edit</button>
                 <button className="btnDelete" onClick={this.onTryDelete}>delete</button>
             </div>

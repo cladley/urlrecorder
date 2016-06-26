@@ -6,8 +6,6 @@ import store      from '../store/urlStore';
 export default React.createClass({
     render() {
         let urlItem = store.find(this.props.params.id);
-        console.log(urlItem);        
-
 
         return (
             <div>

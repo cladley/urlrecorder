@@ -3,7 +3,7 @@ import utils   from '../utils/utils';
 
 export default React.createClass({
 
-    
+
 
     onkeyPress(event) {
         if (event.key === 'Enter') {
@@ -33,9 +33,9 @@ export default React.createClass({
     render() {
         return (
             <div className="create-url">
-                <h5>Add a new one</h5>
+                <h5 className="create-url__title">Add a new url</h5>
                 <form className="create-url__form" onSubmit={this.onSubmit} ref="addForm">
-                    <input type="text" ref="inputUrl" onKeyPress={this.onKeyPress} data-validate="required"/>
+                    <input type="text" className="create-url__input"  ref="inputUrl" onKeyPress={this.onKeyPress} data-validate="required"/>
                     <button type="submit">Add</button>
                 </form>
 

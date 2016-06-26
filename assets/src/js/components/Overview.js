@@ -4,9 +4,6 @@ import store      from '../store/urlStore';
 import UrlList    from './UrlList';
 import AddUrlForm from './AddUrlForm';
 
-
-
-
 export default React.createClass({
     getInitialState() {
         return {
@@ -44,7 +41,7 @@ export default React.createClass({
     render() {
         return (
             <div>
-                <h3>Overview Page</h3>
+               
                 <AddUrlForm  onSubmitUrl={this.onSubmitUrlItem}  />
                 <hr/>
 
