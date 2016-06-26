@@ -1,11 +1,13 @@
 import React      from 'react';
 import ReactDOM   from 'react-dom';
 import Pagination from './Pagination';
+import utils      from '../utils/utils';
 
 let UrlItem = React.createClass({
     getInitialState() {
         return {
             url: this.props.url,
+            initialUrl: this.props.url,
             edit: false,
             delete: false
         };
@@ -14,7 +16,6 @@ let UrlItem = React.createClass({
         var input = ReactDOM.findDOMNode(this.refs.urlInput);
         if(input){
             input.focus();
-
         }
     },
     onEdit(event) {
@@ -26,6 +27,25 @@ let UrlItem = React.createClass({
     },
 
     onEditClose(event) {
+        var input = ReactDOM.findDOMNode(this.refs.urlInput);
+
+        if(utils.isValidUrl(input.value)){
+            this.setState({
+                url: input.value,
+                initialUrl: input.value
+            });
+
+            this.props.onUpdate(input.value);
+
+        }else {
+            this.setState({
+                url: this.state.initialUrl
+            });
+        }
+
+
+
+
         this.setState({
             edit: false
         });
@@ -33,14 +53,27 @@ let UrlItem = React.createClass({
     },
 
     onChange(event) {
- 
         this.setState({
             url: event.target.value
         });
-        this.props.onUpdate(event.target.value);
     },
     onKeyPress(event) {
         if (event.key === 'Enter') {
+
+            // if(utils.isValidUrl(event.target.value)){
+               
+            //     this.setState({
+            //         url: event.target.value,
+            //         initialUrl: event.target.value
+            //     });
+
+            //     this.props.onUpdate(event.target.value);
+            // }else {
+            //     this.setState({
+            //         url: this.state.initialUrl
+            //     });
+            // }
+
             this.onEditClose();
         }
     },
@@ -54,9 +87,10 @@ let UrlItem = React.createClass({
     },
 
     createEditView() {
+        let url = this.state.url;
         return (
             <div className="url-item url-item--edit">
-                <input ref="urlInput" type="text" value={this.state.url} onChange={this.onChange} onKeyPress={this.onKeyPress} onClick={(e) => e.stopPropagation()} />
+                <input ref="urlInput" type="text"  value={url} onChange={this.onChange}  onKeyPress={this.onKeyPress} onClick={(e) => e.stopPropagation()} />
             </div>
         );
     },
