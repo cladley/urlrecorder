@@ -4,6 +4,9 @@ import store      from '../store/urlStore';
 
 
 export default React.createClass({
+    /**
+     * Render component
+    */
     render() {
         let urlItem = store.find(this.props.params.id);
 

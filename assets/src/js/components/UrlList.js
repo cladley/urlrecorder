@@ -4,6 +4,10 @@ import Pagination from './Pagination';
 import utils      from '../utils/utils';
 
 let UrlItem = React.createClass({
+    /**
+     * Returns Initial State object 
+     * @return {Object} 
+     */
     getInitialState() {
         return {
             url: this.props.url,
@@ -12,12 +16,19 @@ let UrlItem = React.createClass({
             delete: false
         };
     },
+    /**
+     * Called when component - 
+     */
     componentDidUpdate(){
         var input = ReactDOM.findDOMNode(this.refs.urlInput);
         if(input){
             input.focus();
         }
     },
+    /**
+     * On edit button clicked
+     * @param {event}
+     */
     onEdit(event) {
         event.stopPropagation();
 
@@ -25,7 +36,10 @@ let UrlItem = React.createClass({
             edit: true
         });
     },
-
+    /**
+     * Closing edit view and saves url if valid
+     * @param {event}
+    */
     onEditClose(event) {
         var input = ReactDOM.findDOMNode(this.refs.urlInput);
 
@@ -48,26 +62,43 @@ let UrlItem = React.createClass({
         });
         window.removeEventListener('click', this.onEditClose);
     },
-
+    /**
+     * Called as text input changes
+     * @param {event}
+    */
     onChange(event) {
         this.setState({
             url: event.target.value
         });
     },
+    /**
+     * Called on keypress within text input
+     * @param {event}
+    */
     onKeyPress(event) {
         if (event.key === 'Enter') {
             this.onEditClose();
         }
     },
+    /**
+     * Show delete view
+     * @param {event}
+    */
     onTryDelete(event) {
         this.setState({
             delete: true
         });
     },
+    /**
+     * Delete UrlItem
+     * @param {event}
+    */
     onDelete(event) {
         this.props.onDelete();
     },
-
+    /**
+     * Create view for edit
+    */
     createEditView() {
         let url = this.state.url;
         return (
@@ -76,6 +107,9 @@ let UrlItem = React.createClass({
             </div>
         );
     },
+    /**
+     * Create view for delete
+    */
     createDeleteView() {
         return (
             <div className="url-item url-item--delete">
@@ -88,6 +122,9 @@ let UrlItem = React.createClass({
             </div>
         );
     },
+    /**
+     * Create default view
+    */
     createDefaultView() {
         return (
             <div className="url-item">
@@ -97,8 +134,9 @@ let UrlItem = React.createClass({
             </div>
         );
     },
-
-
+    /**
+     * Render component
+    */
     render() {
         let url  = this.state.url;
         let view;
@@ -123,26 +161,43 @@ let UrlItem = React.createClass({
 
 
 export default React.createClass({
+    /**
+     * Returns Initial State object 
+     * @return {Object} 
+     */
     getInitialState() {
         return {
             currentPage: 0
         };
     },
-
+     /**
+     * Update url Item 
+     * @param {Number} index 
+     * @param {String} url
+     */
     onUpdate(index, url) {
         this.props.onUpdateUrlItem(index, url);
     },
-
+    /**
+     * Delete url Item 
+     * @param {String} id 
+     */
     onDelete(id) {
         this.props.onDeleteUrlItem(id);
     },
-
+     /**
+     * Change Page Number
+     * @param {Number} pageNumber 
+     */
     pageChange(pageNumber) {
         this.setState({
            currentPage: pageNumber - 1
         });
     },
-
+    /**
+     * Create urls based on current visible page
+     * @param {Array} urls 
+     */
     constructUrlItems(urls){
         return urls.map((urlItem, index) => {
             return (
@@ -152,12 +207,13 @@ export default React.createClass({
             );
         });
     },
-
+    /**
+     * Render component
+    */
     render() {
         let startPosition = this.state.currentPage * this.props.perPage;
         let finishPosition = startPosition + this.props.perPage;
         let urlsPage = this.props.urls.slice(startPosition, finishPosition);
-
 
         return (
             <div className="url-list-container">
@@ -166,7 +222,6 @@ export default React.createClass({
                 </ul>
                 <Pagination perPage={this.props.perPage} total={this.props.urls.length} onPageChange={this.pageChange}/>
             </div>
-
         );
     }
 });

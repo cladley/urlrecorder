@@ -7,11 +7,13 @@ export default React.createClass({
     
     onSubmitUrlItem(urlItem) {
         let data = store.get();
-        data = data.concat([urlItem]);
+        data = [urlItem].concat(data);
         store.save(data);
         browserHistory.push('/result/' + urlItem.id);
     },
-    
+    /**
+     * Render component
+    */
     render() {
         return (
             <div>

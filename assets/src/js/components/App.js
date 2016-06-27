@@ -2,6 +2,9 @@ import React from 'react';
 import { Link } from 'react-router';
 
 export default React.createClass({
+    /**
+     * Render component
+    */
     render() {
         return ( 
             <div>

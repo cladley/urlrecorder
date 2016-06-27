@@ -2,12 +2,19 @@ import React   from 'react';
 import utils   from '../utils/utils';
 
 export default React.createClass({
+    /**
+     * Returns Initial State object 
+     * @return {Object} 
+     */
     getInitialState() {
         return {
             checkingUrl: false
         };
     },
-
+    /**
+     * Called on key press within text input
+     * @param {event} event
+    */
     onkeyPress(event) {
         if (event.key === 'Enter') {
             if(utils.isValidUrl(this.refs.inputUrl.value)){
@@ -15,7 +22,10 @@ export default React.createClass({
             }
         }
     },
-
+    /**
+     * Called on submit of form
+     * @param {event} event
+    */
     onSubmit(event) {
         if(event) event.preventDefault();
 
@@ -39,6 +49,10 @@ export default React.createClass({
                         checkingUrl: false
                     });
 
+                    if(this.refs.inputUrl) {
+                        this.refs.inputUrl.value = "";
+                    }
+
                     this.props.onSubmitUrl(urlItem);
                 }else if(request.notfound) {
                     this.setState({
@@ -60,6 +74,10 @@ export default React.createClass({
             });
         }
     },
+    /**
+     * Create form
+     * @return {JSXComponent}
+    */
     createForm() {
         return (
             <form className="create-url__form" onSubmit={this.onSubmit} ref="addForm">
@@ -68,9 +86,9 @@ export default React.createClass({
             </form>
         );
     },
-
-
-
+    /**
+     * Render component
+    */
     render() {
         let view;
 

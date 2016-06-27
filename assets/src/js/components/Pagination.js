@@ -3,32 +3,57 @@ import ReactDOM from 'react-dom';
 
 
 export default React.createClass({
+    /**
+     * Returns Initial State object 
+     * @return {Object} 
+     */
     getInitialState() {
         return {
             currentPage: 1
         };
     },
+    /**
+     * On prev button clicked
+     */
     onPrevClick(){
         if(this.state.currentPage - 1 >= 1){
             this.changePage(this.state.currentPage - 1);
         }
     },
+    /**
+     * On next button clicked
+     */
     onNextClick() {
         if(this.state.currentPage + 1 <= this.pages) {
             this.changePage(this.state.currentPage + 1);
         }
     },
+    /**
+     * On page button clicked
+     */
     onPageClick(i){
         this.changePage(i);
     },
+    /**
+     * Change page number
+     * @param {Number} pageNumber
+     */
     changePage(pageNumber) {
         this.setState({
             currentPage: pageNumber
         });
         this.props.onPageChange(pageNumber);
     },
+    /**
+     * Render component
+    */
     render() {
         this.pages = Math.ceil(this.props.total / this.props.perPage);
+        
+        if(this.pages === 0) {
+            return null;
+        }
+        
         let pageButtons = [];
 
         for(let i = 1; i < this.pages + 1; i++) {
